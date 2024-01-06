@@ -17,7 +17,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         #endif
 
         window.hasShadow = false
-        window.collectionBehavior = [.auxiliary, .stationary, .transient, .fullScreenAuxiliary, .ignoresCycle, .canJoinAllSpaces]
+        window.collectionBehavior = [.stationary, .transient, .fullScreenAuxiliary, .ignoresCycle, .canJoinAllSpaces]
+
+        if #available(macOS 13.0, *) {
+            window.collectionBehavior.insert(.auxiliary)
+        }
+
         window.level = .statusBar
         window.contentView = ContentView()
         window.backgroundColor = .clear

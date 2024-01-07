@@ -1,10 +1,27 @@
 import Cocoa
+import ServiceManagement
 
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     private var window: NSWindow!
+    private let startAtLoginService = StartAtLoginService()
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
+        setupWindow()
+        startAtLoginService.enableStartAtLogin()
+    }
+
+    func applicationWillTerminate(_ aNotification: Notification) {
+        // Insert code here to tear down your application
+    }
+
+    func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
+        return true
+    }
+
+    // MARK: - Private Methods
+
+    private func setupWindow() {
         window = NSWindow(
             contentRect: .zero,
             styleMask: [.borderless, .hudWindow, .nonactivatingPanel],
@@ -35,14 +52,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.setFrame(NSRect(origin: origin, size: size), display: true)
 
         window.orderFront(nil)
-    }
-
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
-    }
-
-    func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
-        return true
     }
 
 }

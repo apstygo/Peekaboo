@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2EFAA6412B4A98D0002110BD /* StartAtLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFAA6402B4A98D0002110BD /* StartAtLoginService.swift */; };
 		2EFAB99C2B3F2CE7009EC5D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFAB99B2B3F2CE7009EC5D9 /* AppDelegate.swift */; };
 		2EFAB99E2B3F2CE7009EC5D9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EFAB99D2B3F2CE7009EC5D9 /* ViewController.swift */; };
 		2EFAB9A02B3F2CE8009EC5D9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EFAB99F2B3F2CE8009EC5D9 /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2EFAA6402B4A98D0002110BD /* StartAtLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartAtLoginService.swift; sourceTree = "<group>"; };
 		2EFAB9982B3F2CE7009EC5D9 /* Peekaboo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Peekaboo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EFAB99B2B3F2CE7009EC5D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2EFAB99D2B3F2CE7009EC5D9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 				2EFAB99F2B3F2CE8009EC5D9 /* Assets.xcassets */,
 				2EFAB9A42B3F2CE8009EC5D9 /* Peekaboo.entitlements */,
 				2EFAB9AC2B3F36D7009EC5D9 /* main.swift */,
+				2EFAA6402B4A98D0002110BD /* StartAtLoginService.swift */,
 			);
 			path = Peekaboo;
 			sourceTree = "<group>";
@@ -131,6 +134,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EFAB99E2B3F2CE7009EC5D9 /* ViewController.swift in Sources */,
+				2EFAA6412B4A98D0002110BD /* StartAtLoginService.swift in Sources */,
 				2EFAB99C2B3F2CE7009EC5D9 /* AppDelegate.swift in Sources */,
 				2EFAB9AD2B3F36D7009EC5D9 /* main.swift in Sources */,
 			);

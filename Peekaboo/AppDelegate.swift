@@ -1,10 +1,26 @@
 import Cocoa
 import ServiceManagement
 
+private enum Constant {
+    static let browSize = CGSize(width: 184, height: 32)
+    static let browCornerRadius: CGFloat = 10
+    static let borderThickness: CGFloat = 4
+    static let borderRadius = browCornerRadius + borderThickness
+
+    static let windowSize = CGSize(
+        width: browSize.width + borderThickness * 2,
+        height: browSize.height + borderThickness
+    )
+}
+
 class AppDelegate: NSObject, NSApplicationDelegate {
+
+    // MARK: - Private Properties
 
     private var window: NSWindow!
     private let startAtLoginService = StartAtLoginService()
+
+    // MARK: - Internal Methods
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         setupWindow()
@@ -16,7 +32,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool {
-        return true
+        true
     }
 
     // MARK: - Private Methods
@@ -47,7 +63,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Brow size is 184x32
 
         let screenSize = NSScreen.main?.frame.size ?? .zero
-        let size = CGSize(width: 192, height: 36)
+        let size = Constant.windowSize
         let origin = NSPoint(x: (screenSize.width - size.width) / 2, y: screenSize.height - size.height)
         window.setFrame(NSRect(origin: origin, size: size), display: true)
 
@@ -63,7 +79,7 @@ private final class ContentView: NSView {
         super.init(frame: frameRect)
 
         wantsLayer = true
-        layer?.cornerRadius = 14
+        layer?.cornerRadius = Constant.borderRadius
         layer?.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
     }
     

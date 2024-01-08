@@ -23,8 +23,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     // MARK: - Internal Methods
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        setupWindow()
+        window = makeWindow()
+        updateWindowFrame()
+
         startAtLoginService.enableStartAtLogin()
+        setupSubscriptions()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
@@ -37,8 +40,38 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     // MARK: - Private Methods
 
-    private func setupWindow() {
-        window = NSWindow(
+    private func setupSubscriptions() {
+        NotificationCenter.default.addObserver(
+            self, 
+            selector: #selector(onScreenChange),
+            name: NSWindow.didChangeScreenNotification,
+            object: nil
+        )
+    }
+
+    @objc
+    private func onScreenChange() {
+        updateWindowFrame()
+    }
+
+    private func updateWindowFrame() {
+        if let screen: NSScreen = .notched {
+            let size = Constant.windowSize
+
+            let origin = NSPoint(
+                x: screen.frame.origin.x + (screen.frame.width - size.width) / 2,
+                y: screen.frame.origin.y + screen.frame.height - size.height
+            )
+
+            window.setFrame(NSRect(origin: origin, size: size), display: true)
+            window.orderFront(nil)
+        } else {
+            window.setFrame(.zero, display: false)
+        }
+    }
+
+    private func makeWindow() -> NSWindow {
+        let window = NSWindow(
             contentRect: .zero,
             styleMask: [.borderless, .hudWindow, .nonactivatingPanel],
             backing: .buffered,
@@ -60,12 +93,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.contentView = ContentView()
         window.backgroundColor = .clear
 
-        let screenSize = NSScreen.main?.frame.size ?? .zero
-        let size = Constant.windowSize
-        let origin = NSPoint(x: (screenSize.width - size.width) / 2, y: screenSize.height - size.height)
-        window.setFrame(NSRect(origin: origin, size: size), display: true)
-
-        window.orderFront(nil)
+        return window
     }
 
 }
@@ -131,5 +159,24 @@ private final class ContentView: NSView {
         }
 
         layer?.opacity = toOpacity
+    }
+}
+
+extension NSScreen {
+    private struct Size: Hashable {
+        let width: CGFloat
+        let height: CGFloat
+    }
+
+    private static let notchedScreenSizes: Set<Size> = [
+        Size(width: 1512, height: 982),
+        Size(width: 1728, height: 1117)
+    ]
+
+    fileprivate static var notched: NSScreen? {
+        screens.first {
+            let size = Size(width: $0.frame.size.width, height: $0.frame.size.height)
+            return notchedScreenSizes.contains(size)
+        }
     }
 }

@@ -103,12 +103,13 @@ private final class ContentView: NSView {
         super.mouseEntered(with: event)
 
         layer?.backgroundColor = NSColor.controlAccentColor.cgColor
+        setHidden(false)
     }
 
     override func mouseExited(with event: NSEvent) {
         super.mouseExited(with: event)
 
-        layer?.backgroundColor = nil
+        setHidden(true)
     }
 
     private func makeTrackingArea() -> NSTrackingArea {
@@ -117,5 +118,20 @@ private final class ContentView: NSView {
             options: [.activeAlways, .mouseEnteredAndExited],
             owner: self
         )
+    }
+
+    private func setHidden(_ hidden: Bool, animated: Bool = true) {
+        let fromOpacity: Float = hidden ? 1.0 : 0.0
+        let toOpacity: Float = hidden ? 0.0 : 1.0
+
+        if animated {
+            let animation = CABasicAnimation(keyPath: "opacity")
+            animation.fromValue = NSNumber(floatLiteral: Double(fromOpacity))
+            animation.toValue = NSNumber(floatLiteral: Double(toOpacity))
+            animation.duration = 0.07
+            layer?.add(animation, forKey: "opacity")
+        }
+
+        layer?.opacity = toOpacity
     }
 }

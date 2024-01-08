@@ -2,14 +2,14 @@ import Cocoa
 import ServiceManagement
 
 private enum Constant {
-    static let browSize = CGSize(width: 184, height: 32)
-    static let browCornerRadius: CGFloat = 10
+    static let notchSize = CGSize(width: 184, height: 32)
+    static let notchCornerRadius: CGFloat = 10
     static let borderThickness: CGFloat = 4
-    static let borderRadius = browCornerRadius + borderThickness
+    static let borderRadius = notchCornerRadius + borderThickness
 
     static let windowSize = CGSize(
-        width: browSize.width + borderThickness * 2,
-        height: browSize.height + borderThickness
+        width: notchSize.width + borderThickness * 2,
+        height: notchSize.height + borderThickness
     )
 }
 
@@ -59,8 +59,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         window.level = .statusBar
         window.contentView = ContentView()
         window.backgroundColor = .clear
-
-        // Brow size is 184x32
 
         let screenSize = NSScreen.main?.frame.size ?? .zero
         let size = Constant.windowSize
